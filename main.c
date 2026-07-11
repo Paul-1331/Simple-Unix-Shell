@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <signal.h>
 #include "parser.h"
 #include "executor.h"
 #include "jobs.h"
@@ -10,6 +11,8 @@
 
 int main()
 {
+    signal(SIGINT, SIG_IGN);
+    
     char input[MAX];
     command_t cmd;
 
