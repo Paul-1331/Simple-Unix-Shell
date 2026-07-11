@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <sys/time.h>
 #include "executor.h"
 #include "builtins.h"
 
@@ -74,6 +75,9 @@ void execute_pipe(command_t *cmd)
 
 void execute_command(command_t *cmd)
 {
+    struct timeval start, end;
+    gettimeofday(&start, NULL);
+
     if (handle_builtin(cmd))
         return;
 
@@ -81,4 +85,12 @@ void execute_command(command_t *cmd)
         execute_pipe(cmd);
     else
         execute_single(cmd);
+
+    if (!cmd->background) {
+        gettimeofday(&end, NULL);
+        double elapsed = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0;
+        if (elapsed >= 0.0) {
+            printf("[Executed in %.3fs]\n", elapsed);
+        }
+    }
 }
