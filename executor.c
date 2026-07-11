@@ -12,6 +12,8 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MIN3(a, b, c) MIN(a, MIN(b, c))
 
+//calculates the minimum number of operations 
+// (insertions, deletions, substitutions, and transpositions) required to change one word into another.
 int damerau_levenshtein(const char *s1, const char *s2) {
     int s1len = strlen(s1);
     int s2len = strlen(s2);
