@@ -22,6 +22,14 @@ int handle_builtin(command_t *cmd)
             fprintf(stderr, "cd: missing argument\n");
         return 1;
     }
-
+    
+    if (strcmp(cmd->args1[0], "help") == 0)
+    {
+        printf("Available built-in commands:\n");
+        printf("  exit: Exit the shell\n");
+        printf("  cd: Change directory\n");
+        printf("  help: Display this help message\n");
+        return 1;
+    }
     return 0;
 }
