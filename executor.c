@@ -19,11 +19,12 @@ int damerau_levenshtein(const char *s1, const char *s2) {
     int s2len = strlen(s2);
     
     int dp[s1len + 1][s2len + 1];
-    
-    for (int i = 0; i <= s1len; i++) {
+    dp[0][0] = 0;
+
+    for (int i = 1; i <= s1len; i++) {
         dp[i][0] = i;
     }
-    for (int j = 0; j <= s2len; j++) {
+    for (int j = 1; j <= s2len; j++) {
         dp[0][j] = j;
     }
     
