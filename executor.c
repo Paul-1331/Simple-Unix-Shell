@@ -144,13 +144,10 @@ void execute_command(command_t *cmd)
     struct timeval start, end;
     gettimeofday(&start, NULL);
 
-    if (handle_builtin(cmd))
-        return;
+    if (handle_builtin(cmd)) return;
 
-    if (cmd->is_pipe)
-        execute_pipe(cmd);
-    else
-        execute_single(cmd);
+    if (cmd->is_pipe) execute_pipe(cmd);
+    else execute_single(cmd);
 
     if (!cmd->background) {
         gettimeofday(&end, NULL);
